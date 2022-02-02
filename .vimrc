@@ -32,20 +32,27 @@ silent! while 0
   set nocompatible
 silent! endwhile
 
+" Use X Window clipboard as default register
+set clipboard=unnamedplus
+
 " Allow backspacing over everything in insert mode.
 set backspace=indent,eol,start
 set whichwrap=b,s,>,<,],[
 
 " Set tab size and convert tabs to whitespaces
-" set expandtab
 " set smarttab
 set shiftwidth=4
-set tabstop=4
+set tabstop=4 softtabstop=4
+set expandtab
+set smartindent
 
 set history=200		" keep 200 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set wildmenu		" display completion matches in a status line
+set noswapfile
+set undodir=~/.vim/undodir
+set undofile
 
 set ttimeout		" time out for key codes
 set ttimeoutlen=100	" wait up to 100ms after Esc for special key
@@ -65,9 +72,9 @@ set display=truncate
 set scrolloff=5
 
 " Do incremental searching when it's possible to timeout.
-if has('reltime')
-  set incsearch
-endif
+"if has('reltime')
+set incsearch
+"endif
 
 " Do not recognize octal numbers for Ctrl-A and Ctrl-X, most users find it
 " confusing.
@@ -75,7 +82,7 @@ set nrformats-=octal
 
 " For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries.
 if has('win32')
-  set guioptions-=t
+set guioptions-=t
 endif
 
 " Don't use Ex mode, use Q for formatting.
@@ -89,21 +96,23 @@ inoremap <C-U> <C-G>u<C-U>
 
 " Automatic close braces
 inoremap {  {}<Left>
-inoremap {<CR>  {<CR><Tab><CR>}<Up><Right>
-inoremap {{ {
-inoremap {} {}
+inoremap {<CR>  {<CR>}<C-c><S-o>
+"inoremap {<CR>  {<CR><Tab><CR>}<Up><Right>
+"inoremap {{ {
+"inoremap {} {}    
 
 inoremap [  []<Left>
-inoremap [<CR>  [<CR><Tab><CR>]<Up><Right>
-inoremap [[ [
-inoremap [] []
+"inoremap [<CR>  [<CR><Tab><CR>]<Up><Right>
+"inoremap [[ [
+"inoremap [] []
 
 inoremap (  ()<Left>
-inoremap (<CR>  (<CR><Tab><CR>)<Up><Right>
-inoremap (( (
-inoremap () ()
+"inoremap (<CR>  (<CR><Tab><CR>)<Up><Right>
+"inoremap (( (
+"inoremap () ()
 
-
+" Map Ctrl+Shift+C to copy to clipboard
+vnoremap <C-y> :'<,'>w !xclip -selection clipboard<Cr><Cr>
 
 " In many terminal emulators the mouse works just fine.  By enabling it you
 " can position the cursor, Visually select and scroll with the mouse.
