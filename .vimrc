@@ -45,6 +45,10 @@ set shiftwidth=4
 set tabstop=4 softtabstop=4
 set expandtab
 set smartindent
+set breakindent
+set textwidth=150
+set wrap
+set linebreak
 
 set history=200		" keep 200 lines of command line history
 set ruler		" show the cursor position all the time
