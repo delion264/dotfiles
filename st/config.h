@@ -5,7 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "DejaVuSansMono:pixelsize=18:antialias=true:autohint=true";
+static char *font = "Meslo LGS Nerd Font Mono:style=Regular:pixelsize=18:antialias=true:autohint=true";
+//static char *font = "DejaVuSansMono:pixelsize=18:antialias=true:autohint=true";
 //static char *font = "Fira Code:pixelsize=16:antialias=true:autohint=true";
 static int borderpx = 2;
 
