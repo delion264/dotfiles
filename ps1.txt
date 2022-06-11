@@ -1,1 +1,28 @@
-PS1='\e[0;32m[\e[m\e[0;34m\u\e[m\e[0;34m@\e[m\e[0;34m\h\e[m \e[0;32m\D{%Y-%m-%d %H:%M:%S %Z}\e[m \e[1;36m\w\e[m \e[1;31m$(parse_git_branch)\e[m\e[0;32m]\e[m\n\e[0;32m\$\e[m '
+# Colour definitions
+LBLUE="\[\033[0;34m\]"
+DBLUE="\[\033[1;34m\]"
+LGREEN="\[\033[0;32m\]"
+DGREEN="\[\033[1;32m\]"
+LRED="\[\033[0;31m\]"
+DRED="\[\033[1;31m\]"
+LCYAN="\[\033[0;36m\]"
+DCYAN="\[\033[1;36m\]"
+LPURPLE="\[\033[0;35m\]"
+DPURPLE="\[\033[1;35m\]"
+RESET="\[\033[0m\]"
+
+# Show git branch
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+# Reflect changes in git branch
+function changes_in_branch() { 
+	if expr length + "$(git status -s)" 2>&1 > /dev/null; then     
+		echo -ne "${DRED}"; 
+	else
+		echo -ne "${DPURPLE}"; fi; 
+}
+
+alias ls='ls --color=auto'
+PS1="$LBLUE\u@\h $LGREEN\D{%Y-%m-%d %H:%M:%S %Z} $LGREEN[$DCYAN\w$LGREEN]\n$DGREEN\$ $RESET"
